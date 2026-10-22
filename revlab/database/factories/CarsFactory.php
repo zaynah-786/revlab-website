@@ -18,7 +18,11 @@ class CarsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'manufacturer' => $this->faker->company(),
+            'model' => $this->faker->word(),
+            'year' => $this->faker->numberBetween(1966, 2026),
+            'horsepower' => $this->faker->numberBetween(550, 5000),
+            'weight' => $this->faker->numberBetween(980, 2000),
         ];
     }
 }
