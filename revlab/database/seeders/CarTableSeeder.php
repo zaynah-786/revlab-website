@@ -37,5 +37,7 @@ class CarTableSeeder extends Seeder
         $a -> weight = 1493;
         $a -> save();
 
+        Car::factory()->count(50)->create();
+
     }
 }
