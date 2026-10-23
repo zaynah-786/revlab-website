@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Profile extends Model
 {
-    // todo add UseHasFactory trait to the Profile model
+    /** @use HasFactory<ProfileFactory> */
+    use HasFactory;
 
     public function user()
     {
