@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Post;
 
 class PostSeeder extends Seeder
 {
@@ -12,6 +13,17 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $a = new Post;
+        $a->title = 'is the koenigseggjesko the best car in the world?';
+        $a->description = 'opinions please';
+        $a->save();
+
+        $a = new Post;
+        $a->title = 'what are you best supercars of 2026';
+        $a->description = 'supercar rankings?';
+        $a->save();
+
+    Post::factory()->count(8)->create();
+
     }
 }
