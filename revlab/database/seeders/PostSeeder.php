@@ -14,12 +14,12 @@ class PostSeeder extends Seeder
     public function run(): void
     {
         $a = new Post;
-        $a->title = 'is the koenigseggjesko the best car in the world?';
+        $a->title = 'is the koenigsegg jesko the best car in the world?';
         $a->description = 'opinions please';
         $a->save();
 
         $a = new Post;
-        $a->title = 'what are you best supercars of 2026';
+        $a->title = 'what are your best supercars of 2026';
         $a->description = 'supercar rankings?';
         $a->save();
 
