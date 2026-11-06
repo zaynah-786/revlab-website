@@ -16,21 +16,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $a = new User;
-        $a -> name = 'Admin';
-        $a -> email = 'admin1@revlab.com';
-        $a -> password = 'password';
-        $a -> email_verified_at = now();
-        $a -> remember_token = \Str::random(10);
-        $a -> save();
+        $user1 = new User;
+        $user1 -> name = 'Admin';
+        $user1 -> email = 'admin1@revlab.com';
+        $user1 -> password = 'password';
+        $user1 -> email_verified_at = now();
+        $user1 -> remember_token = \Str::random(10);
+        $user1 -> save();
 
-        $a = new User;
-        $a -> name = 'Zaynah Alam 1';
-        $a -> email = 'zaynah1@revlab.com';
-        $a -> password = 'password123';
-        $a -> email_verified_at = now();
-        $a -> remember_token = \Str::random(10);
-        $a -> save();
+        $user2 = new User;
+        $user2 -> name = 'Zaynah Alam 1';
+        $user2 -> email = 'zaynah1@revlab.com';
+        $user2 -> password = 'password123';
+        $user2 -> email_verified_at = now();
+        $user2 -> remember_token = \Str::random(10);
+        $user2 -> save();
     
         User::factory(50)->create();
 

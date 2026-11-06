@@ -14,15 +14,15 @@ class CompanySeeder extends Seeder
     public function run(): void
     {
         //
-        $a = Company::create(['name' => 'Koenigsegg']);
-        $a->carModels()->createMany([
+        $company = Company::create(['name' => 'Koenigsegg']);
+        $company->carModels()->createMany([
             ['name' => 'Jesko'],
             ['name' => 'Agera RS'],
             ['name' => 'Regera'],
         ]);
 
-        $a = Company::create(['name' => 'Pagani']);
-        $a->carModels()->createMany([
+        $company2 = Company::create(['name' => 'Pagani']);
+        $company2->carModels()->createMany([
             ['name' => 'Zonda'],
             ['name' => 'Huayra'],
             ['name' => 'Utopia'],

@@ -13,13 +13,13 @@ class TagSeeder extends Seeder
      */
     public function run(): void
     {
-        $a = new Tag;
-        $a->name = 'koenigsegg';
-        $a->save();
+        $tag1 = new Tag;
+        $tag1->name = 'koenigsegg';
+        $tag1->save();
 
-        $a = new Tag;
-        $a->name = 'supercar';
-        $a->save();
+        $tag2 = new Tag;
+        $tag2->name = 'supercar';
+        $tag2->save();
 
         Tag::factory()->count(8)->create();
     }

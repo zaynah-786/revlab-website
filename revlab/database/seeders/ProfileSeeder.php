@@ -17,12 +17,12 @@ class ProfileSeeder extends Seeder
 
         $user = User::factory()->create();
 
-        $a = new Profile;
-        $a -> name = 'User Profile 1';
-        $a -> email = 'testuser@revlab.com';
-        $a -> phone_number = '123-456-7890';
-        $a->user_id = $user->id;
-        $a -> save();
+        $profile = new Profile;
+        $profile -> name = 'User Profile 1';
+        $profile -> email = 'testuser@revlab.com';
+        $profile -> phone_number = '123-456-7890';
+        $profile->user_id = $user->id;
+        $profile -> save();
 
         Profile::factory(50)->create();
 
