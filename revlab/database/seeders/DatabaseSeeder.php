@@ -35,7 +35,6 @@ class DatabaseSeeder extends Seeder
         User::factory(50)->create();
 
     $this->call(ProfileSeeder::class);
-    $this->call(CarTableSeeder::class);
     $this->call(PostSeeder::class);
     $this->call(TagSeeder::class);
     $this->call(PostTagSeeder::class);

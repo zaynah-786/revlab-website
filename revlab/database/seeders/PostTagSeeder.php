@@ -17,12 +17,12 @@ class PostTagSeeder extends Seeder
     {
         //
         $postTag1 = Post::where('title', 'is the koenigsegg jesko the best car in the world?')->first();
-        $postTag1->tags()->attach(
+        $postTag1 -> tags()->attach(
             Tag::where('name', 'koenigsegg')->first()->id
         );
 
         $postTag2 = Post::where('title', 'what are your best supercars of 2026')->first();
-        $postTag2->tags()->attach(
+        $postTag2 -> tags()->attach(
             Tag::where('name', 'supercar')->first()->id
         );
     }

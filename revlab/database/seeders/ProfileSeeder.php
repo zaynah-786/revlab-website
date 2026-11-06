@@ -21,7 +21,7 @@ class ProfileSeeder extends Seeder
         $profile -> name = 'User Profile 1';
         $profile -> email = 'testuser@revlab.com';
         $profile -> phone_number = '123-456-7890';
-        $profile->user_id = $user->id;
+        $profile -> user_id = $user->id;
         $profile -> save();
 
         Profile::factory(50)->create();
