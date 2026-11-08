@@ -15,7 +15,6 @@ class PostTagSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         $postTag1 = Post::where('title', 'is the koenigsegg jesko the best car in the world?')->first();
         $postTag1 -> tags()->attach(
             Tag::where('name', 'koenigsegg')->first()->id
@@ -25,6 +24,12 @@ class PostTagSeeder extends Seeder
         $postTag2 -> tags()->attach(
             Tag::where('name', 'supercar')->first()->id
         );
+
+        $tags = Tag::all(); 
+        Post::all()->each(function ($post) use ($tags) 
+        { $post->tags()->syncWithoutDetaching( 
+            $tags->random(rand(1, 3))->pluck('id')); 
+        });
     }
     }
 

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -32,7 +33,7 @@ class DatabaseSeeder extends Seeder
         $user2 -> remember_token = \Str::random(10);
         $user2 -> save();
     
-        User::factory(50)->create();
+        User::factory(50)->has(Profile::factory())->create();
 
     $this->call(ProfileSeeder::class);
     $this->call(PostSeeder::class);

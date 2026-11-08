@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostSeeder extends Seeder
 {
@@ -23,7 +24,7 @@ class PostSeeder extends Seeder
         $post2 -> description = 'supercar rankings?';
         $post2 -> save();
 
-    Post::factory()->count(8)->create();
+        Post::factory(8)->hasAttached(Tag::factory(3))->create();
 
     }
 }

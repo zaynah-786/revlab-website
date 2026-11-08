@@ -24,7 +24,5 @@ class ProfileSeeder extends Seeder
         $profile -> user_id = $user->id;
         $profile -> save();
 
-        Profile::factory(50)->create();
-
     }
 }
