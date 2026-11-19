@@ -10,12 +10,10 @@
         </a>
 
         <span class="font-mono text-xs uppercase tracking-widest text-purple-300">
-            Chassis #{{ str_pad($carModel->id, 3, '0', STR_PAD_LEFT) }}
         </span>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        {{-- Left Column: Identity, Editorial & Telemetry Specs --}}
         <div class="lg:col-span-5 space-y-6">
             <div>
                 <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-widest">
@@ -35,7 +33,6 @@
                 </p>
             @endif
 
-            {{-- Headline Performance Grid --}}
             <div class="grid grid-cols-2 gap-px bg-[#2b2320] border border-[#2b2320] font-mono">
                 <div class="bg-[#14110f] p-3.5">
                     <span class="block text-[10px] uppercase tracking-widest text-[#7d7068]">Output</span>
@@ -126,7 +123,6 @@
             </dl>
         </div>
 
-        {{-- Right Column: Interactive 3D Inspection Bay --}}
         <div class="lg:col-span-7 lg:sticky lg:top-8">
             <div class="border border-[#2b2320] bg-[#191513] p-4 sm:p-6">
                 <div class="flex items-center justify-between border-b border-[#2b2320] pb-3 mb-4 font-mono text-[11px] uppercase tracking-widest text-[#7d7068]">

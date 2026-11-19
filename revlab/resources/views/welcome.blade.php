@@ -3,7 +3,6 @@
 @section('title', 'The Paddock')
 
 @section('content')
-    {{-- Asymmetric Hero Section --}}
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end pb-12 border-b border-[#2b2320]">
         <div class="lg:col-span-8">
             <p class="font-mono text-xs uppercase tracking-widest text-orange-400 mb-3">
@@ -30,7 +29,6 @@
         </div>
     </div>
 
-    {{-- Offset Feature Split --}}
     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pt-10">
         <a href="{{ route('cars.index') }}"
            class="md:col-span-7 group border border-[#2b2320] bg-[#191513] p-7 hover:border-orange-400/60 transition-colors flex flex-col justify-between min-h-[240px]">
