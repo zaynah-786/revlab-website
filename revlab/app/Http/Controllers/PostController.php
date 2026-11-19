@@ -69,7 +69,7 @@ public function store(Request $request)
      */
     public function show(string $id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::with(['tags', 'comments.user'])->findOrFail($id);
         return view('posts.show', ['post' => $post]);
     }
 

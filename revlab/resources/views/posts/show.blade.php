@@ -51,7 +51,7 @@
         </div>
 
         @auth
-            <form method="POST" action="#" class="mb-10 border border-[#2b2320] bg-[#191513] p-5 space-y-4">
+            <form method="POST" action="{{ route('comments.store', $post) }}" class="mb-10 border border-[#2b2320] bg-[#191513] p-5 space-y-4">
                 @csrf
                 <div>
                     <label for="body" class="block font-mono text-xs uppercase tracking-wider text-[#a89c94] mb-2">
