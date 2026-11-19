@@ -39,6 +39,6 @@ class DatabaseSeeder extends Seeder
     $this->call(PostSeeder::class);
     $this->call(TagSeeder::class);
     $this->call(PostTagSeeder::class);
-    $this->call(CompanySeeder::class);
+    $this->call(CarCsvSeeder::class);
     }
 }

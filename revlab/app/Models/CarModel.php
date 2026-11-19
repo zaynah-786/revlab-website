@@ -3,16 +3,45 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Database\Factories\CarModelFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CarModel extends Model
 {
-    /** @use HasFactory<CarModelFactory> */
-    use HasFactory;
+    protected $fillable = [
+        'company_id',
+        'name',
+        'year',
+        'country',
+        'production_numbers',
+        'horsepower',
+        'torque_nm',
+        'zero_to_hundred_s',
+        'top_speed_kmh',
+        'engine',
+        'transmission',
+        'drivetrain',
+        'weight_kg',
+        'chassis',
+        'aero_highlight',
+        'description',
+        'sketchfab_url',
+    ];
 
-        public function company()
+    public function company()
     {
-        return $this->belongsTo(\App\Models\Company::class);
+        return $this->belongsTo(Company::class);
+    }
+
+    public function getSketchfabEmbedUrlAttribute(): ?string
+    {
+        if (! $this->sketchfab_url) {
+            return null;
+        }
+
+        if (preg_match('/([a-f0-9]{32})$/i', trim($this->sketchfab_url), $matches)) {
+            $id = $matches[1];
+            return "https://sketchfab.com/models/{$id}/embed?ui_theme=dark&dnt=1";
+        }
+
+        return null;
     }
 }
