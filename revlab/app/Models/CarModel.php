@@ -39,7 +39,7 @@ class CarModel extends Model
 
         if (preg_match('/([a-f0-9]{32})$/i', trim($this->sketchfab_url), $matches)) {
             $id = $matches[1];
-            return "https://sketchfab.com/models/{$id}/embed?ui_theme=dark&dnt=1";
+            return "https://sketchfab.com/models/{$id}/embed?autostart=1&ui_theme=dark&ui_infos=0&ui_watermark=0&dnt=1";
         }
 
         return null;

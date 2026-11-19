@@ -131,11 +131,11 @@
             <div class="border border-[#2b2320] bg-[#191513] p-4 sm:p-6">
                 <div class="flex items-center justify-between border-b border-[#2b2320] pb-3 mb-4 font-mono text-[11px] uppercase tracking-widest text-[#7d7068]">
                     <span>3D / Inspection Bay</span>
-                    <span class="text-orange-400">Drag to Orbit // Scroll to Zoom</span>
+                    <span class="text-orange-400">Drag and move to orbit the car</span>
                 </div>
 
                 @if (!empty($carModel->sketchfab_embed_url))
-                    <div class="aspect-video w-full bg-[#120f0e] border border-[#2b2320] overflow-hidden">
+                    <div class="w-full h-[340px] sm:h-[440px] lg:h-[500px] bg-[#120f0e] border border-[#2b2320] overflow-hidden">
                         <iframe
                             title="{{ $carModel->name }} 3D Model"
                             src="{{ $carModel->sketchfab_embed_url }}"
