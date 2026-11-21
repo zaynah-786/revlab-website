@@ -20,7 +20,6 @@ class ProfileSeeder extends Seeder
         $profile = new Profile;
         $profile -> name = 'User Profile 1';
         $profile -> email = 'testuser@revlab.com';
-        $profile -> phone_number = '123-456-7890';
         $profile -> user_id = $user->id;
         $profile -> save();
 
