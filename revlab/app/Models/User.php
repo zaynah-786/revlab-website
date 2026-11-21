@@ -17,25 +17,36 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-public function profile()
+protected static function booted(): void
+    {
+        static::created(function (User $user) {
+            $user->profile()->create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'phone_number' => 'N/A',
+            ]);
+        });
+    }
+
+    public function profile()
     {
         return $this->hasOne(Profile::class);
     }
 
-public function posts()
-{
-    return $this->hasMany(Post::class);
-}
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 
-public function comments()
-{
-    return $this->hasMany(Comment::class);
-}
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 
-public function isAdmin(): bool
-{
-    return $this->role === 'admin';
-}
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
 
     /**
      * Get the attributes that should be cast.
@@ -50,4 +61,3 @@ public function isAdmin(): bool
         ];
     }
 }
-
