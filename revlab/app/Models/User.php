@@ -32,6 +32,11 @@ public function comments()
     return $this->hasMany(Comment::class);
 }
 
+public function isAdmin(): bool
+{
+    return $this->role === 'admin';
+}
+
     /**
      * Get the attributes that should be cast.
      *
