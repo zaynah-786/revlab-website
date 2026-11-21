@@ -15,21 +15,25 @@ class PostTagSeeder extends Seeder
      */
     public function run(): void
     {
-        $postTag1 = Post::where('title', 'Is the Koenigsegg Jesko the best car in the world?')->first();
-        $postTag1 -> tags()->attach(
-            Tag::where('name', 'Koenigsegg')->first()->id
-        );
+        $postTag1 = Post::where('title', 'like', '%Koenigsegg Jesko%')->first();
+        $tag1 = Tag::where('name', 'Koenigsegg')->first();
+        if ($postTag1 && $tag1) {
+            $postTag1->tags()->syncWithoutDetaching([$tag1->id]);
+        }
 
-        $postTag2 = Post::where('title', 'What are your best supercars of 2026?')->first();
-        $postTag2 -> tags()->attach(
-            Tag::where('name', 'Supercar')->first()->id
-        );
+        $postTag2 = Post::where('title', 'like', '%best supercars of 2026%')->first();
+        $tag2 = Tag::where('name', 'Supercar')->first();
+        if ($postTag2 && $tag2) {
+            $postTag2->tags()->syncWithoutDetaching([$tag2->id]);
+        }
 
-        $tags = Tag::all(); 
-        Post::all()->each(function ($post) use ($tags) 
-        { $post->tags()->syncWithoutDetaching( 
-            $tags->random(rand(1, 3))->pluck('id')); 
-        });
+        $tags = Tag::all();
+        if ($tags->isNotEmpty()) {
+            Post::all()->each(function ($post) use ($tags) {
+                $post->tags()->syncWithoutDetaching(
+                    $tags->random(min(rand(1, 3), $tags->count()))->pluck('id')
+                );
+            });
+        }
     }
-    }
-
+}
