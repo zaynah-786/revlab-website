@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\Tag;
 
@@ -48,14 +49,21 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:150'],
             'description' => ['required', 'string'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
             'tags' => ['nullable', 'array'],
             'tags.*' => ['exists:tags,id'],
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+        }
 
         $post = Post::create([
             'user_id' => $request->user()->id,
             'title' => $validated['title'],
             'description' => $validated['description'],
+            'image' => $imagePath,
         ]);
 
         if (!empty($validated['tags'])) {
@@ -94,14 +102,25 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:150'],
             'description' => ['required', 'string'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
             'tags' => ['nullable', 'array'],
             'tags.*' => ['exists:tags,id'],
         ]);
 
-        $post->update([
+        $dataToUpdate = [
             'title' => $validated['title'],
             'description' => $validated['description'],
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            if (!empty($post->image)) {
+                Storage::disk('public')->delete($post->image);
+            }
+
+            $dataToUpdate['image'] = $request->file('image')->store('posts', 'public');
+        }
+
+        $post->update($dataToUpdate);
 
         $post->tags()->sync($validated['tags'] ?? []);
 
@@ -118,6 +137,10 @@ class PostController extends Controller
 
         if (! $user || ($user->id !== $post->user_id && ! $user->isAdmin())) {
             abort(403);
+        }
+
+        if (!empty($post->image)) {
+            Storage::disk('public')->delete($post->image);
         }
 
         $post->delete();

@@ -14,7 +14,7 @@
         </span>
     </div>
 
-    <form method="POST" action="{{ route('posts.store') }}" class="max-w-3xl space-y-6">
+    <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data" class="max-w-3xl space-y-6">
         @csrf
 
         <div>
@@ -37,6 +37,17 @@
                       placeholder="But no Jesko slander (unless you have a good reason) (hint: you don't)"
                       class="w-full bg-[#191513] border border-[#362c28] focus:border-orange-400 focus:outline-none p-4 text-sm text-[#f5efe9] placeholder-[#6e625b] leading-relaxed">{{ old('description') }}</textarea>
             @error('description')
+                <p class="font-mono text-xs text-orange-400 mt-1.5">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label for="image" class="block font-mono text-xs uppercase tracking-wider text-[#a89c94] mb-2">
+                Photo / Media
+            </label>
+            <input type="file" name="image" id="image" accept="image/jpeg,image/png,image/webp"
+                   class="block w-full font-mono text-xs text-[#a89c94] file:mr-4 file:py-2 file:px-4 file:border file:border-[#362c28] file:bg-[#191513] file:text-orange-400 hover:file:border-orange-400 file:cursor-pointer cursor-pointer">
+            @error('image')
                 <p class="font-mono text-xs text-orange-400 mt-1.5">{{ $message }}</p>
             @enderror
         </div>

@@ -73,6 +73,14 @@
                                 {{ $post->description }}
                             </p>
 
+                            @if (!empty($post->image))
+                                <div class="mt-3 max-w-md overflow-hidden border border-[#362c28] bg-[#120f0e]">
+                                    <img src="{{ asset('storage/' . $post->image) }}"
+                                         alt="{{ $post->title }}"
+                                         class="w-full max-h-60 object-cover">
+                                </div>
+                            @endif
+
                             @if ($post->tags->isNotEmpty())
                                 <div class="flex flex-wrap gap-2 mt-4">
                                     @foreach ($post->tags as $tag)

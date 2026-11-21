@@ -33,6 +33,14 @@
             {{ $post->description }}
         </div>
 
+        @if (!empty($post->image))
+            <div class="mt-6 max-w-4xl overflow-hidden border border-[#2b2320] bg-[#191513]">
+                <img src="{{ asset('storage/' . $post->image) }}"
+                     alt="{{ $post->title }}"
+                     class="w-full max-h-[32rem] object-cover">
+            </div>
+        @endif
+
         @if ($post->tags->isNotEmpty())
             <div class="flex flex-wrap gap-2 mt-8 pt-6 border-t border-[#2b2320]">
                 @foreach ($post->tags as $tag)
@@ -65,12 +73,13 @@
 
                 @php
                     $selectedTags = old('tags', $post->tags->pluck('id')->all());
-                    $hasPostEditErrors = $errors->has('title') || $errors->has('description') || $errors->has('tags');
+                    $hasPostEditErrors = $errors->has('title') || $errors->has('description') || $errors->has('image') || $errors->has('tags');
                 @endphp
 
                 <form id="edit-post-form"
                       method="POST"
                       action="{{ route('posts.update', $post->id) }}"
+                      enctype="multipart/form-data"
                       class="mt-6 max-w-3xl space-y-5 border border-[#2b2320] bg-[#191513] p-5 {{ $hasPostEditErrors ? '' : 'hidden' }}">
                     @csrf
                     @method('PUT')
@@ -93,6 +102,17 @@
                         <textarea name="description" id="edit-post-description" rows="5"
                                   class="w-full bg-[#120f0e] border border-[#362c28] focus:border-orange-400 focus:outline-none p-3 text-sm text-[#f5efe9] leading-relaxed">{{ old('description', $post->description) }}</textarea>
                         @error('description')
+                            <p class="font-mono text-xs text-orange-400 mt-1.5">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="edit-post-image" class="block font-mono text-xs uppercase tracking-wider text-[#a89c94] mb-2">
+                            Replace Photo / Media
+                        </label>
+                        <input type="file" name="image" id="edit-post-image" accept="image/jpeg,image/png,image/webp"
+                               class="block w-full font-mono text-xs text-[#a89c94] file:mr-4 file:py-2 file:px-4 file:border file:border-[#362c28] file:bg-[#120f0e] file:text-orange-400 hover:file:border-orange-400 file:cursor-pointer cursor-pointer">
+                        @error('image')
                             <p class="font-mono text-xs text-orange-400 mt-1.5">{{ $message }}</p>
                         @enderror
                     </div>
