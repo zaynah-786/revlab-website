@@ -13,14 +13,9 @@ class TagSeeder extends Seeder
      */
     public function run(): void
     {
-        $tag1 = new Tag;
-        $tag1 -> name = 'koenigsegg';
-        $tag1 -> save();
+        Tag::firstOrCreate(['name' => 'Koenigsegg']);
+        Tag::firstOrCreate(['name' => 'Supercars']);
 
-        $tag2 = new Tag;
-        $tag2 -> name = 'supercar';
-        $tag2 -> save();
-
-        Tag::factory()->count(8)->create();
+        Tag::factory()->count(50)->create();
     }
 }

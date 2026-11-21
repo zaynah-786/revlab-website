@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
 
         $user1 = new User;
-        $user1 -> name = 'Admin';
+        $user1 -> name = 'revlabadmin';
         $user1 -> email = 'admin1@revlab.com';
         $user1 -> password = 'password';
         $user1 -> role = 'admin';
@@ -27,9 +27,10 @@ class DatabaseSeeder extends Seeder
         $user1 -> save();
 
         $user2 = new User;
-        $user2 -> name = 'Zaynah Alam 1';
+        $user2 -> name = 'zaynahrevlab';
         $user2 -> email = 'zaynah1@revlab.com';
         $user2 -> password = 'password123';
+        $user2 -> role = 'user';
         $user2 -> email_verified_at = now();
         $user2 -> remember_token = \Str::random(10);
         $user2 -> save();

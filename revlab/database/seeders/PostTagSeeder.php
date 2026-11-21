@@ -15,13 +15,13 @@ class PostTagSeeder extends Seeder
      */
     public function run(): void
     {
-        $postTag1 = Post::where('title', 'like', '%Koenigsegg Jesko%')->first();
+        $postTag1 = Post::where('title', ' Is the Koenigsegg Jesko the greatest internal combustion car ever built?')->first();
         $tag1 = Tag::where('name', 'Koenigsegg')->first();
         if ($postTag1 && $tag1) {
             $postTag1->tags()->syncWithoutDetaching([$tag1->id]);
         }
 
-        $postTag2 = Post::where('title', 'like', '%best supercars of 2026%')->first();
+        $postTag2 = Post::where('title', 'End of year debate: What are your best supercars of 2026?')->first();
         $tag2 = Tag::where('name', 'Supercar')->first();
         if ($postTag2 && $tag2) {
             $postTag2->tags()->syncWithoutDetaching([$tag2->id]);
