@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $user1 -> name = 'Admin';
         $user1 -> email = 'admin1@revlab.com';
         $user1 -> password = 'password';
+        $user1 -> role = 'admin';
         $user1 -> email_verified_at = now();
         $user1 -> remember_token = \Str::random(10);
         $user1 -> save();

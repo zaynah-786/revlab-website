@@ -18,15 +18,14 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
 protected static function booted(): void
-    {
-        static::created(function (User $user) {
-            $user->profile()->create([
-                'name' => $user->name,
-                'email' => $user->email,
-                'phone_number' => 'N/A',
-            ]);
-        });
-    }
+{
+    static::created(function (User $user) {
+        $user->profile()->create([
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+    });
+}
 
     public function profile()
     {

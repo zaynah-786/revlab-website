@@ -5,11 +5,10 @@
     <div class="p-6 rounded-xl border border-orange-500/30 bg-stone-900/70 space-y-4">
         <div>
             <h1 class="text-2xl font-bold">{{ $user->name }}</h1>
-            <p class="text-sm opacity-80 mt-1">{{ $user->email }}</p>
         </div>
 
         @if ($user->profile)
-            <div class="pt-4 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+            <div class="pt-4 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div>
                     <p class="text-xs uppercase tracking-wide opacity-65">Profile Name</p>
                     <p class="mt-0.5 font-medium">{{ $user->profile->name }}</p>
@@ -17,10 +16,6 @@
                 <div>
                     <p class="text-xs uppercase tracking-wide opacity-65">Profile Email</p>
                     <p class="mt-0.5 font-medium">{{ $user->profile->email }}</p>
-                </div>
-                <div>
-                    <p class="text-xs uppercase tracking-wide opacity-65">Phone Number</p>
-                    <p class="mt-0.5 font-medium">{{ $user->profile->phone_number }}</p>
                 </div>
             </div>
         @else
