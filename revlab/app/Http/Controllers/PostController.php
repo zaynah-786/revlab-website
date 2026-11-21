@@ -15,7 +15,7 @@ public function index(Request $request)
 {
     $tags = Tag::all();
 
-    $query = Post::with('tags');
+    $query = Post::with(['user', 'tags']);
 
     if ($request->filled('tag_id')) {
         $query->whereHas('tags', function ($q) use ($request) {
@@ -53,6 +53,7 @@ public function store(Request $request)
         ]);
 
         $post = Post::create([
+            'user_id' => $request->user()->id,
             'title' => $validated['title'],
             'description' => $validated['description'],
         ]);
@@ -69,7 +70,7 @@ public function store(Request $request)
      */
     public function show(string $id)
     {
-        $post = Post::with(['tags', 'comments.user'])->findOrFail($id);
+        $post = Post::with(['user', 'tags', 'comments.user'])->findOrFail($id);
         return view('posts.show', ['post' => $post]);
     }
 

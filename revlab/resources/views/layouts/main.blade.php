@@ -20,10 +20,11 @@
 
             <nav class="flex items-center gap-6 font-mono text-xs uppercase tracking-wider text-[#a89c94]">
                 <a href="{{ route('home') }}" class="hover:text-orange-400 transition-colors">Home</a>
-                <a href="{{ route('cars.index') }}" class="hover:text-orange-400 transition-colors">Cars</a>
+                <a href="{{ route('cars.index') }}" class="hover:text-orange-400 transition-colors">The Vault</a>
                 <a href="{{ route('posts.index') }}" class="hover:text-orange-400 transition-colors">Forum</a>
 
                 @auth
+                    <a href="{{ route('users.me') }}" class="hover:text-orange-400 transition-colors">Profile</a>
                     <a href="{{ route('profile.edit') }}" class="hover:text-orange-400 transition-colors">Settings</a>
                     <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf

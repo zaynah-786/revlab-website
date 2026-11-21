@@ -16,8 +16,10 @@
 
     <article class="border-b border-[#2b2320] pb-10">
         <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs uppercase tracking-wider text-[#8a7d75] mb-3">
-            @if (!empty($post->user?->name))
-                <span class="text-purple-300">{{ $post->user->name }}</span>
+            @if ($post->user)
+                <a href="{{ route('users.show', $post->user) }}" class="text-purple-300 hover:text-orange-400 underline transition-colors">
+                    {{ $post->user->name }}
+                </a>
                 <span>/</span>
             @endif
             <span>{{ $post->created_at?->format('d M Y, H:i') ?? 'Published' }}</span>
@@ -78,7 +80,13 @@
             @forelse ($post->comments ?? [] as $comment)
                 <div class="py-4">
                     <div class="flex items-center justify-between font-mono text-[11px] uppercase tracking-wider text-[#8a7d75] mb-1.5">
-                        <span class="text-purple-300">{{ $comment->user->name ?? 'Driver' }}</span>
+                        @if ($comment->user)
+                            <a href="{{ route('users.show', $comment->user) }}" class="text-purple-300 hover:text-orange-400 underline transition-colors">
+                                {{ $comment->user->name }}
+                            </a>
+                        @else
+                            <span class="text-purple-300">Driver</span>
+                        @endif
                         <span>{{ $comment->created_at?->diffForHumans() }}</span>
                     </div>
                     <p class="text-sm text-[#cfc6be] leading-relaxed">{{ $comment->body }}</p>

@@ -36,8 +36,8 @@ class DatabaseSeeder extends Seeder
         User::factory(50)->has(Profile::factory())->create();
 
     $this->call(ProfileSeeder::class);
-    $this->call(PostSeeder::class);
     $this->call(TagSeeder::class);
+    $this->call(PostSeeder::class);
     $this->call(PostTagSeeder::class);
     $this->call(CarCsvSeeder::class);
     }

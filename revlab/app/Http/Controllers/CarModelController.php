@@ -21,7 +21,6 @@ class CarModelController extends Controller
             $query->where('company_id', $request->company_id);
         }
 
-        // Bonus task: split into pages and keep filter query parameter across pages
         $carModels = $query->paginate(6)->withQueryString();
 
         return view('cars.index', [

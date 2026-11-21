@@ -54,8 +54,10 @@
 
                         <div class="min-w-0">
                             <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-[#8a7d75] mb-1.5">
-                                @if (!empty($post->user?->name))
-                                    <span class="text-purple-300">{{ $post->user->name }}</span>
+                                @if ($post->user)
+                                    <a href="{{ route('users.show', $post->user) }}" class="text-purple-300 hover:text-orange-400 underline transition-colors">
+                                        {{ $post->user->name }}
+                                    </a>
                                     <span>/</span>
                                 @endif
                                 <span>{{ $post->created_at?->diffForHumans() ?? 'Thread' }}</span>
