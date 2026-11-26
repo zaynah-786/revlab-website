@@ -47,6 +47,11 @@ protected static function booted(): void
         return $this->role === 'admin';
     }
 
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *

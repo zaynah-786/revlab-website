@@ -60,5 +60,72 @@
             <p class="text-sm opacity-70">No comments by this user yet.</p>
         @endforelse
     </div>
+
+    {{-- Saved Bookmarks Section --}}
+    @auth
+        @if(auth()->id() === $user->id)
+            <div class="space-y-4">
+                <h2 class="text-xl font-semibold">
+                    Bookmarks ({{ $user->bookmarks->count() }})
+                </h2>
+
+                @forelse ($user->bookmarks as $bookmark)
+                    @php
+                        $item = $bookmark->bookmarkable;
+                    @endphp
+
+                    @if ($item instanceof \App\Models\CarModel)
+                        <a href="{{ route('cars.show', ['id' => $item->id]) }}"
+                           class="block p-5 rounded-xl border border-white/10 bg-stone-900/50 space-y-2 hover:border-orange-500/30 transition-colors">
+
+                            <p class="text-xs uppercase tracking-wide text-orange-400">
+                                Saved Hypercar
+                            </p>
+
+                            <h3 class="text-lg font-semibold">
+                                {{ $item->name }}
+                            </h3>
+
+                            @if ($item->year)
+                                <p class="text-sm opacity-70">
+                                    {{ $item->year }}
+                                </p>
+                            @endif
+
+                            <p class="text-xs text-orange-400">
+                                View Spec Sheet →
+                            </p>
+                        </a>
+
+                    @elseif ($item instanceof \App\Models\Post)
+                        <a href="{{ route('posts.show', ['id' => $item->id]) }}"
+                           class="block p-5 rounded-xl border border-white/10 bg-stone-900/50 space-y-2 hover:border-orange-500/30 transition-colors">
+
+                            <p class="text-xs uppercase tracking-wide text-purple-300">
+                                Saved Forum Post
+                            </p>
+
+                            <h3 class="text-lg font-semibold">
+                                {{ $item->title }}
+                            </h3>
+
+                            <p class="text-sm opacity-85">
+                                {{ $item->description }}
+                            </p>
+
+                            <p class="text-xs text-orange-400">
+                                View Thread →
+                            </p>
+                        </a>
+                    @endif
+
+                @empty
+                    <p class="text-sm opacity-70">
+                        You haven't bookmarked any cars or forum posts yet.
+                    </p>
+                @endforelse
+            </div>
+        @endif
+    @endauth
 </div>
 @endsection

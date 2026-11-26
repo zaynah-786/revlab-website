@@ -43,5 +43,10 @@ class CarModel extends Model
         }
 
         return null;
+        }
+
+    public function bookmarks()
+        {
+            return $this->morphMany(Bookmark::class, 'bookmarkable');
+        }
     }
-}

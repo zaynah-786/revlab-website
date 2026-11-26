@@ -1,3 +1,4 @@
+
 @extends('layouts.main')
 
 @section('title', $carModel->name)
@@ -9,8 +10,45 @@
             ← Back to Vault
         </a>
 
-        <span class="font-mono text-xs uppercase tracking-widest text-purple-300">
-        </span>
+        {{-- Polymorphic Bookmark Button --}}
+        @auth
+            @php
+                $isBookmarked = $carModel->bookmarks()
+                    ->where('user_id', auth()->id())
+                    ->exists();
+            @endphp
+
+            <form method="POST"
+                  action="{{ route(
+                      $isBookmarked ? 'bookmarks.destroy' : 'bookmarks.store',
+                      ['type' => 'car', 'id' => $carModel->id]
+                  ) }}">
+
+                @csrf
+
+                @if($isBookmarked)
+                    @method('DELETE')
+                @endif
+
+                <button type="submit"
+                        class="font-mono text-xs uppercase tracking-widest
+                               border border-orange-400 px-4 py-2
+                               text-orange-400 hover:bg-orange-400
+                               hover:text-black transition-colors">
+
+                    {{ $isBookmarked ? '★ Remove Bookmark' : '☆ Add to Bookmarks' }}
+
+                </button>
+            </form>
+        @else
+            <a href="{{ route('login') }}"
+               class="font-mono text-xs uppercase tracking-widest
+                      border border-[#362c28] px-4 py-2
+                      text-[#a89c94] hover:text-orange-400
+                      hover:border-orange-400 transition-colors">
+                Log in to Bookmark
+            </a>
+        @endauth
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">

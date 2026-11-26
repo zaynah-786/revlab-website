@@ -32,4 +32,9 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class)->latest();
     }
+
+    public function bookmarks()
+    {
+        return $this->morphMany(Bookmark::class, 'bookmarkable');
+    }
 }
