@@ -17,6 +17,23 @@ return new class extends Migration
             $table->string('name');
 
             $table->foreignId('company_id')->constrained()->cascadeOnDelete();
+
+            $table->integer('year')->nullable();
+            $table->string('country')->nullable();
+            $table->string('production_numbers')->nullable();
+            $table->integer('torque_nm')->nullable();
+            $table->decimal('zero_to_hundred_s', 4, 1)->nullable();
+            $table->integer('top_speed_kmh')->nullable();
+            $table->string('engine')->nullable();
+            $table->string('transmission')->nullable();
+            $table->string('drivetrain')->nullable();
+            $table->integer('weight_kg')->nullable();
+            $table->string('chassis')->nullable();
+            $table->string('aero_highlight')->nullable();
+            $table->text('description')->nullable();
+            $table->string('sketchfab_url')->nullable();
+
+            $table->integer('horsepower')->nullable();
         });
     }
 

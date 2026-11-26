@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers;
@@ -29,7 +30,7 @@ class BookmarkController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        return back()->with('success', 'Added to your bookmarks.');
+        return back();
     }
 
     public function destroy(Request $request, string $type, string $id)
@@ -40,6 +41,6 @@ class BookmarkController extends Controller
             ->where('user_id', $request->user()->id)
             ->delete();
 
-        return back()->with('success', 'Removed from your bookmarks.');
+        return back();
     }
 }

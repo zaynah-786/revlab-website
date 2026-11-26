@@ -145,6 +145,5 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->route('posts.index')->with('message', 'Post was deleted.');
-    }
+        return redirect()->route('posts.index');    }
 }
