@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\ProfileController;
@@ -14,18 +15,9 @@ Route::get('/', function () {
     Route::get('/cars', [CarModelController::class, 'index'])->name('cars.index');
     Route::get('/cars/{id}', [CarModelController::class, 'show'])->name('cars.show');
 
-Route::get('/users/{user}', function (User $user) {
-    $user->load([
-        'profile',
-        'posts',
-        'comments.post',
-        'bookmarks.bookmarkable',
-    ]);
-
+Route::get('/users/{user}', function (User $user) {$user->load(['profile', 'posts', 'comments.post', 'bookmarks.bookmarkable']);
     return view('users.show', [
-        'user' => $user,
-    ]);
-})->name('users.show');
+        'user' => $user,]);})->name('users.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -43,11 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
     Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
-    Route::post('/bookmarks/{type}/{id}', [BookmarkController::class, 'store'])
-        ->whereNumber('id')->name('bookmarks.store');
-
-    Route::delete('/bookmarks/{type}/{id}', [BookmarkController::class, 'destroy'])
-        ->whereNumber('id')->name('bookmarks.destroy');
+    Route::post('/bookmarks/{type}/{id}', [BookmarkController::class, 'store'])->whereNumber('id')->name('bookmarks.store');
+    Route::delete('/bookmarks/{type}/{id}', [BookmarkController::class, 'destroy'])->whereNumber('id')->name('bookmarks.destroy');
 
     Route::get('/my-profile', function () {
         return redirect()->route('users.show', auth()->user());
