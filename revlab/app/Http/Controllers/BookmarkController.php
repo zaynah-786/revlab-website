@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Http\Controllers;
@@ -7,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CarModel;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
+use App\Notifications\BookmarkPost;
 
 class BookmarkController extends Controller
 {
@@ -26,9 +26,17 @@ class BookmarkController extends Controller
     {
         $item = $this->getBookmarkable($type, $id);
 
-        $item->bookmarks()->firstOrCreate([
+        $bookmark = $item->bookmarks()->firstOrCreate([
             'user_id' => $request->user()->id,
         ]);
+
+        if ($item instanceof Post && $bookmark->wasRecentlyCreated) {
+            if ($item->user && $item->user_id !== $request->user()->id) {
+                $item->user->notify(
+                    new BookmarkPost($item, $request->user()->name)
+                );
+            }
+        }
 
         return back();
     }

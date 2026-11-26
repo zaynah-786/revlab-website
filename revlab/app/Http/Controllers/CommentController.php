@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Notifications\ReplytoPost;
 
 class CommentController extends Controller
 {
@@ -20,6 +21,12 @@ class CommentController extends Controller
         ]);
 
         $comment->load('user');
+
+        if ($post->user && $post->user_id !== $request->user()->id) {
+            $post->user->notify(
+                new ReplytoPost($post, $request->user()->name)
+            );
+        }
 
         if ($request->expectsJson()) {
             return response()->json([
